@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #yesBtn {
+            background-color: red;
+            color: white;
+            transition: all 0.3s;
+        }
+        #noBtn {
+            background-color: gray;
+            color: white;
+        }
+        #messages {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Do you want a Valentine's?</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div id="messages"></div>
+    
+    <div id="genderSelection" class="hidden">
+        <h2>Are you a...</h2>
+        <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdsZB4lYVtrrzwcZA9OIeshDc1jQ6KnLf4ZjxPZuQ2TlQFTOQ/viewform?usp=header'">Girl</button>
+        <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSfhstqPtQkDoDn55HWUvotym6SPCmRGbHxCE64UyXFbRIcavg/viewform?usp=header'">Boy</button>
+    </div>
+    
+    <p id="consent" class="hidden">By proceeding, you consent that your response may be posted.</p>
+    
+    <script>
+        let noCount = 0;
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const messages = document.getElementById("messages");
+        const genderSelection = document.getElementById("genderSelection");
+        const consent = document.getElementById("consent");
+
+        noBtn.addEventListener("click", () => {
+            noCount++;
+            const responses = ["Why not?", "Why pookie?", "Please :("];
+            messages.textContent = responses[Math.min(noCount - 1, responses.length - 1)];
+            yesBtn.style.transform = `scale(${1 + noCount * 0.1})`;
+        });
+
+        yesBtn.addEventListener("click", () => {
+            document.querySelector("h1").textContent = "Great! Now one more question.";
+            yesBtn.style.display = "none";
+            noBtn.style.display = "none";
+            messages.style.display = "none";
+            genderSelection.classList.remove("hidden");
+            consent.classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
